@@ -1,0 +1,8 @@
+要从模块中导入单个函数或类：
+from module_name import object_name
+要从模块中导入多个单个对象：
+from module_name import first_object,second_object
+要重命名模块：
+import module_name as new_name
+要从模块中导入对象并重命名：
+from module_name import object_name as new_name

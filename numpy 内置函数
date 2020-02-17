@@ -1,0 +1,260 @@
+#函数 np.zeros(shape) 会创建一个全是 0 并且为给定形状的 ndarray
+# We create a 3 x 4 ndarray full of zeros. 
+X = np.zeros((3,4))
+#可更改数据类型 X= np.zeros((3,4),dtype = int)
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print information about X
+print('X has dimensions:', X.shape)
+print('X is an object of type:', type(X))
+print('The elements in X are of type:', X.dtype)
+
+#输出：
+X =
+[[ 0. 0. 0. 0.]
+ [ 0. 0. 0. 0.]
+ [ 0. 0. 0. 0.]]
+
+X has dimensions: (3, 4)
+X is an object of type: class 'numpy.ndarray'
+The elements in X are of type: float64
+————————————————————————————————————————————————————————————
+# np.ones() 函数创建一个具有指定形状的 ndarray，其中的元素全是 1
+# We create a 3 x 2 ndarray full of ones. 
+X = np.ones((3,2))
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print information about X
+print('X has dimensions:', X.shape)
+print('X is an object of type:', type(X))
+print('The elements in X are of type:', X.dtype) 
+
+#输出：
+X =
+[[ 1. 1.]
+ [ 1. 1.]
+ [ 1. 1.]]
+
+X has dimensions: (3, 2)
+X is an object of type: class 'numpy.ndarray'
+The elements in X are of type: float64
+————————————————————————————————————————————————————————————————
+#np.full() 函数可以创建一个具有指定形状的 ndarray，其中的元素全是我们想指定的任何数字。
+#np.full(shape, constant value) 函数有两个参数。第一个参数是你要创建的 ndarray 的形状，第二个参数是你要向数组中填充的常数值。
+# We create a 2 x 3 ndarray full of fives. 
+X = np.full((2,3), 5) 
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print information about X
+print('X has dimensions:', X.shape)
+print('X is an object of type:', type(X))
+print('The elements in X are of type:', X.dtype)  
+
+#输出：
+X =
+[[5 5 5]
+ [5 5 5]]
+
+X has dimensions: (2, 3)
+X is an object of type: class 'numpy.ndarray'
+The elements in X are of type: int64
+——————————————————————————————————————————————————————————————————
+#线性代数中的基本数组是单位矩阵。单位矩阵是主对角线上全是 1，其他位置全是 0 的方形矩阵。
+#函数 np.eye(N) 会创建一个对应于单位矩阵的方形 N x N ndarray。
+# We create a 5 x 5 Identity matrix. 
+X = np.eye(5)
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+# We print information about X
+print('X has dimensions:', X.shape)
+print('X is an object of type:', type(X))
+print('The elements in X are of type:', X.dtype)  
+
+#输出
+X =
+[[ 1. 0. 0. 0. 0.]
+ [ 0. 1. 0. 0. 0.]
+ [ 0. 0. 1. 0. 0.]
+ [ 0. 0. 0. 1. 0.]
+ [ 0. 0. 0. 0. 1.]]
+
+X has dimensions: (5, 5)
+X is an object of type: class 'numpy.ndarray'
+The elements in X are of type: float64
+——————————————————————————————————————————————————————
+#使用 np.diag() 函数创建对角矩阵
+# Create a 4 x 4 diagonal matrix that contains the numbers 10,20,30, and 50
+# on its main diagonal
+X = np.diag([10,20,30,50])
+
+# We print X
+print()
+print('X = \n', X)
+print()
+
+#输出
+X =
+[[10 0 0 0]
+ [ 0 20 0 0]
+ [ 0 0 30 0]
+ [ 0 0 0 50]]
+ ————————————————————————————————————————————————————————————
+np.arange(N) 将创建一个秩为 1 的 ndarray，其中包含从 0 到 N - 1 的连续整数。
+# We create a rank 1 ndarray that has sequential integers from 0 to 9
+x = np.arange(10)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+#输出
+x = [0 1 2 3 4 5 6 7 8 9]
+
+x has dimensions: (10,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
+——————————————————————————————————————————————————————————————————
+np.arange(start,stop) 将创建一个秩为 1 的 ndarray，其中包含位于半开区间 [start, stop) 内并均匀分布的值
+# We create a rank 1 ndarray that has sequential integers from 4 to 9. 
+x = np.arange(4,10)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+#输出
+x = [4 5 6 7 8 9]
+
+x has dimensions: (6,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
+——————————————————————————————————————————————————————————————————————
+np.arange(start,stop,step) 将创建一个秩为 1 的 ndarray，
+其中包含位于半开区间 [start, stop) 内并均匀分布的值，step 表示两个相邻值之间的差。
+# We create a rank 1 ndarray that has evenly spaced integers from 1 to 13 in steps of 3.
+x = np.arange(1,14,3)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+#输出
+x = [ 1 4 7 10 13]
+
+x has dimensions: (5,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
+————————————————————————————————————————————————————————————————————
+np.linspace(start, stop, N) 函数返回 N 个在闭区间 [start, stop] 内均匀分布的数字。
+在调用 np.linspace() 函数时，必须至少以 np.linspace(start,stop) 的形式传入两个参数。默认元素数量为 N= 50
+# We create a rank 1 ndarray that has 10 integers evenly spaced between 0 and 25.
+x = np.linspace(0,25,10)
+
+# We print the ndarray
+print()
+print('x = \n', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+#输出
+x = [ 0. 2.77777778 5.55555556 8.33333333 11.11111111 13.88888889 16.66666667 19.44444444 22.22222222 25. ]
+
+x has dimensions: (10,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: float64
+——————————————————————————————————————————————————————————————————————————
+可以不包含区间的结束点（就像 np.arange() 函数一样），方法是在 np.linspace() 函数中将关键字 endpoint 设为 False 。
+# We create a rank 1 ndarray that has 10 integers evenly spaced between 0 and 25,
+# with 25 excluded.
+x = np.linspace(0,25,10, endpoint = False)
+
+# We print the ndarray
+print()
+print('x = ', x)
+print()
+
+# We print information about the ndarray
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+#输出
+x = [ 0. 2.5 5. 7.5 10. 12.5 15. 17.5 20. 22.5]
+
+x has dimensions: (10,)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: float64
+————————————————————————————————————————————————————————————————————————————————
+np.reshape(ndarray, new_shape) 函数会将给定 ndarray 转换为指定的 new_shape。
+请务必注意：new_shape 应该与给定 ndarray 中的元素数量保持一致。
+# We create a rank 1 ndarray with sequential integers from 0 to 19
+x = np.arange(20)
+
+# We print x
+print()
+print('Original x = ', x)
+print()
+
+# We reshape x into a 4 x 5 ndarray 
+x = np.reshape(x, (4,5))
+#x = np.arange(20).reshape(4,5)
+# We print the reshaped x
+print()
+print('Reshaped x = \n', x)
+print()
+
+# We print information about the reshaped x
+print('x has dimensions:', x.shape)
+print('x is an object of type:', type(x))
+print('The elements in x are of type:', x.dtype) 
+
+#输出
+Original x = [ 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
+
+Reshaped x =
+[[ 0 1 2 3 4]
+ [ 5 6 7 8 9]
+ [10 11 12 13 14]
+ [15 16 17 18 19]]
+
+x has dimensions: (4, 5)
+x is an object of type: class 'numpy.ndarray'
+The elements in x are of type: int64
+——————————————————————————————————————————————————————————————————————————

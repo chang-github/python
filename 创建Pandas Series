@@ -1,0 +1,36 @@
+#Pandas series 是一个像数组一样的一维对象，可以存储很多类型的数据，例如数字或字符串。
+#Pandas Series 和 NumPy ndarray 之间的主要区别之一是你可以为 Pandas Series 中的每个元素分配索引标签。
+#Pandas Series 和 NumPy ndarrays 之间的另一个明显区别是 Pandas Series 可以存储不同类型的数据。
+#使用 pd.Series(data, index) 命令创建 Pandas Series，
+# We import Pandas as pd into Python
+import pandas as pd
+# We create a Pandas Series that stores a grocery list
+groceries = pd.Series(data = [30, 6, 'Yes', 'No'], index = ['eggs', 'apples', 'milk', 'bread'])
+# We display the Groceries Pandas Series
+groceries
+
+eggs      30
+apples     6
+milk     Yes
+bread     No
+dtype: object
+
+# We print some information about Groceries
+print('Groceries has shape:', groceries.shape)
+print('Groceries has dimension:', groceries.ndim)
+print('Groceries has a total of', groceries.size, 'elements')
+
+Groceries has shape: (4,)
+Groceries has dimension: 1
+Groceries has a total of 4 elements
+
+# We print the index and data of Groceries
+print('The data in Groceries is:', groceries.values)
+print('The index of Groceries is:', groceries.index)
+
+The data in Groceries is: [30,6,'Yes','No']
+The index of Groceries is: Index(['eggs', 'apples', 'milk', 'bread'], dtype='object')
+
+#使用 in 命令检查是否存在该标签：
+x = 'bananas' in groceries 
+#x为True/False

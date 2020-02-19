@@ -1,0 +1,97 @@
+#Pandas DataFrames 是具有带标签的行和列的二维数据结构
+#首先，我们将使用 Pandas Series 字典手动创建一个 DataFrame。
+#第一步是创建 Pandas Series 字典。字典创建完毕后，我们可以将该字典传递给 pd.DataFrame() 函数。
+# We import Pandas as pd into Python
+import pandas as pd
+# We create a dictionary of Pandas Series 
+items = {'Bob' : pd.Series(data = [245, 25, 55], index = ['bike', 'pants', 'watch']),
+         'Alice' : pd.Series(data = [40, 110, 500, 45], index = ['book', 'glasses', 'bike', 'pants'])}
+# We create a Pandas DataFrame by passing it a dictionary of Pandas Series
+shopping_carts = pd.DataFrame(items)
+# We display the DataFrame
+shopping_carts
+
+        Alice	Bob
+bike  	500.0	245.0
+book  	40.0	NaN
+glasses	110.0	NaN
+pants 	45.0	25.0
+watch	  NaN	  55.0
+#如果不向 Pandas Series 提供索引标签，Pandas 在创建 DataFrame 时将使用数字行索引。
+# We create a dictionary of Pandas Series without indexes
+data = {'Bob' : pd.Series([245, 25, 55]),
+        'Alice' : pd.Series([40, 110, 500, 45])}
+# We create a DataFrame
+df = pd.DataFrame(data)
+	Alice	Bob
+0	40	245.0
+1	110	25.0
+2	500	55.0
+3	45	NaN
+shopping_carts.shape
+(5, 2)
+shopping_carts.ndim
+2
+shopping_carts.size
+10 
+shopping_carts.values
+[[    500.    245.]
+[       40.     nan]
+[     110.     nan]
+[       45.      25.]
+[     nan       55.]]
+#row index
+shopping_carts.index   
+Index(['bike', 'book', 'glasses', 'pants', 'watch'], dtype='object')
+#column index
+shopping_carts.columns
+Index(['Alice', 'Bob'], dtype='object')
+__________________________________________________________________________
+#通过关键字 columns 和 index 选择要将哪些数据放入 DataFrame 中
+# We Create a DataFrame that only has Bob's data
+bob_shopping_cart = pd.DataFrame(items, columns=['Bob'])
+      Bob
+bike	245
+pants	25
+watch	55
+
+# We Create a DataFrame that only has selected items for both Alice and Bob
+sel_shopping_cart = pd.DataFrame(items, index = ['pants', 'book'])
+    	Alice	Bob
+pants	45	25.0
+book	40	NaN
+
+# We Create a DataFrame that only has selected items for Alice
+alice_sel_shopping_cart = pd.DataFrame(items, index = ['glasses', 'bike'], columns = ['Alice'])
+	      Alice
+glasses	110
+bike	  500
+_______________________________________________________________________________
+#使用列表（数组）字典手动地创建 DataFrame
+# We create a dictionary of lists (arrays)
+data = {'Integers' : [1,2,3],
+        'Floats' : [4.5, 8.2, 9.6]}
+# We create a DataFrame 
+df = pd.DataFrame(data)
+	Floats	Integers
+0	4.5	    1
+1	8.2    	2
+2	9.6   	3
+
+#通过在 pd.DataFrame() 函数中使用关键字 index，为行索引添加标签
+# We create a DataFrame and provide the row index
+df = pd.DataFrame(data, index = ['label 1', 'label 2', 'label 3'])
+      	Floats	Integers
+label 1	4.5	    1
+label 2	8.2	    2
+label 3	9.6   	3
+__________________________________________________________________________________
+#使用 Python 字典列表手动创建 Pandas DataFrame 
+# We create a list of Python dictionaries
+items2 = [{'bikes': 20, 'pants': 30, 'watches': 35}, 
+          {'watches': 10, 'glasses': 50, 'bikes': 15, 'pants':5}]
+# We create a DataFrame 
+store_items = pd.DataFrame(items2)
+  bikes	glasses	pants	watches
+0	20	  NaN	    30  	35
+1	15	  50.0	  5   	10

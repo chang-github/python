@@ -1,0 +1,11 @@
+#Pandas Series 提供了两个属性 .loc 和 .iloc，帮助我们清晰地表明指代哪种情况。
+#属性 .loc 表示 位置，用于明确表明我们使用的是标签索引。
+#属性 .iloc 表示整型位置，用于明确表明我们使用的是数字索引。
+groceries.loc[['eggs', 'apples']]
+groceries.iloc[[2, 3]]
+groceries['eggs'] = 2
+————————————————————————————————————————————————————————————————————————————————
+#Series.drop(label) 方法会从给定 Series 中删除给定的 label。
+#Series.drop(label) 方法不在原 Series 中删除元素，即不会更改被修改的原始 Series。
+#可以通过在 .drop() 方法中将关键字 inplace 设为 True，原地地从 Pandas Series 中删除条目
+groceries.drop('apples', inplace = True)

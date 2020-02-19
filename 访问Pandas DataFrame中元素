@@ -1,0 +1,41 @@
+import pandas as pd
+items = [{'bikes':20,'pants':30,'watches':33},{'watches':10,'glasses':50,'bikes':15,'pants':5}]
+store_item = pd.DataFrame{items,index=['store 1','store 2']}
+# We print the store_items DataFrame
+print(store_items)
+
+	          bikes	glasses	pants	watches
+store 1	    20	    NaN	  30  	35
+store 2	    15	    50.0	 5	  10
+
+store_items[['bikes']]
+	      bikes
+store 1	20
+store 2	15
+
+store_items[['bikes', 'pants']]
+        bikes	pants
+store 1	20  	30
+store 2	15	  5
+
+store_items.loc[['store 1']]
+	           bikes	glasses	pants	watches
+store 1	    20	    NaN	    30	  35
+#在访问 DataFrame 中的单个元素时，始终提供标签，并且列标签在前，格式为 dataframe[column][row]
+store_items['bikes']['store 2']
+15
+
+#向 store_items DataFrame 添加一个新列，表示每个商店的衬衫库存
+#添加新的列时，新列添加到了 DataFrame 的末尾
+store_items['shirts'] = [15,2]
+        bikes	glasses	pants	watches	shirts
+store 1	20  	NaN	    30	  35	    15
+store 2	15  	50.0	  5	    10	    2
+
+#使用算术运算符向 DataFrame 中的其他列之间添加新列
+store_items['suits'] = store_items['pants'] + store_items['shirts']
+        bikes	glasses	pants	watches	shirts	suits
+store 1	20	  NaN	    30	  35	    15	    45
+store 2	15	  50.0	  5	    10	    2     	7
+
+

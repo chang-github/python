@@ -38,4 +38,71 @@ store_items['suits'] = store_items['pants'] + store_items['shirts']
 store 1	20	  NaN	    30	  35	    15	    45
 store 2	15	  50.0	  5	    10	    2     	7
 
+#向 DataFrame 中添加行，首先创建新的 Dataframe，然后将其附加到原始 DataFrame 上。
+# We create a dictionary from a list of Python dictionaries that will number of items at the new store
+new_items = [{'bikes': 20, 'pants': 30, 'watches': 35, 'glasses': 4}]
+# We create new DataFrame with the new_items and provide and index labeled store 3
+new_store = pd.DataFrame(new_items, index = ['store 3'])
+	bikes	glasses	pants	watches
+store 3	20	4	30	35
+# We append store 3 to our store_items DataFrame
+store_items = store_items.append(new_store)
+	bikes	glasses	pants	shirts	suits	watches
+store 1	20	NaN	30	15.0	45.0	35
+store 2	15	50.0	5	2.0	7.0	10
+store 3	20	4.0	30	NaN	NaN	35
+#注意，将新行附加到 DataFrame 后，列按照字母顺序排序了。
 
+#使用特定列的特定行中的数据向 DataFrame 添加新的列
+# We add a new column using data from particular rows in the watches column
+store_items['new watches'] = store_items['watches'][1:]
+	bikes	glasses	pants	shirts	suits	watches	new watches
+store 1	20	NaN	30	15.0	45.0	35	NaN
+store 2	15	50.0	5	2.0	7.0	10	10.0
+store 3	20	4.0	30	NaN	NaN	35	35.0
+
+#dataframe.insert(loc,label,data) 方法能将新列（具有给定列标签和给定数据）插入 dataframe 的 loc 位置
+# We insert a new column with label shoes right before the column with numerical index 4
+store_items.insert(4, 'shoes', [8,5,0])
+	bikes	glasses	pants	shirts	shoes	suits	watches	new watches
+store 1	20	NaN	30	15.0	8	45.0	35	NaN
+store 2	15	50.0	5	2.0	5	7.0	10	10.0
+store 3	20	4.0	30	NaN	0	NaN	35	35.0
+——————————————————————————————————————————————————————————————————————————————————————————————————————
+#.pop() 方法仅删除列，而 .drop() 方法可以同时用于删除行和列
+# We remove the new watches column
+store_items.pop('new watches')
+	bikes	glasses	pants	shirts	shoes	suits	watches
+store 1	20	NaN	30	15.0	8	45.0	35
+store 2	15	50.0	5	2.0	5	7.0	10
+store 3	20	4.0	30	NaN	0	NaN	35
+
+# We remove the watches and shoes columns
+store_items = store_items.drop(['watches', 'shoes'], axis = 1)
+	bikes	glasses	pants	shirts	suits
+store 1	20	NaN	30	15.0	45.0
+store 2	15	50.0	5	2.0	7.0
+store 3	20	4.0	30	NaN	NaN
+
+# We remove the store 2 and store 1 rows
+store_items = store_items.drop(['store 2', 'store 1'], axis = 0)
+	bikes	glasses	pants	shirts	suits
+store 3	20	4.0	30	NaN	NaN
+——————————————————————————————————————————————————————————————————————————————————————————————————————
+#使用 .rename() 方法更改行和列标签
+# We change the column label bikes to hats
+store_items = store_items.rename(columns = {'bikes': 'hats'})
+	hats	glasses	pants	shirts	suits
+store 3	20	4.0	30	NaN	NaN
+
+# We change the row label from store 3 to last store
+store_items = store_items.rename(index = {'store 3': 'last store'})
+		hats	glasses	pants	shirts	suits
+last store	20	4.0	30	NaN	NaN
+————————————————————————————————————————————————————————————————————————————————
+#将索引改为 DataFrame 中的某个列
+# We change the row index to be the data in the pants column
+store_items = store_items.set_index('pants')
+	hats	glasses	shirts	suits
+pants
+30	20	4.0	NaN	NaN

@@ -30,28 +30,55 @@ dtype: int64
 
 x =  store_items.isnull().sum().sum()
 3
-________________________________________________
+
+# We print the number of non-NaN values in our DataFrame
+print('Number of non-NaN values in the columns of our DataFrame:\n', store_items.count())
+Number of non-NaN values in the columns of our DataFrame:
+bikes          3
+glasses        2
+pants          3
+shirts         2
+shoes          3
+suits          2
+watches        3
+dtype: int64
+——————————————————————————————————————————————————————————————
+#删除包含NaN的行或列
 # We drop any rows with NaN values
 store_items.dropna(axis = 0)
+	bikes	glasses	pants	shirts	shoes	suits	watches
+store 2	15	50.0	5	2.0	5	7.0	10
 # We drop any columns with NaN values
 store_items.dropna(axis = 1)
-#在 dropna() 方法中将关键字 inplace 设为 True，在原地删除目标行或列。
-_________________________________________________
-使用 .fillna() 方法将所有 NaN 值替换为合适的值
+	bikes	pants	shoes	watches
+store 1	20	30	8	35
+store 2	15	5	5	10
+store 3	20	30	10	35
+#.dropna() 方法不在原地地删除具有 NaN 值的行或列。
+#可在 dropna() 方法中将关键字 inplace 设为 True，在原地删除目标行或列。
+————————————————————————————————————————————————————————————
+#使用 .fillna() 方法，将所有 NaN 值替换为合适的值
 # We replace all NaN values with 0
 store_items.fillna(0)
-
-#.fillna(method = 'ffill', axis) 将通过前向填充 (ffill) 方法沿着给定 axis 使用上个已知值替换 NaN 值。
-# We replace NaN values with the previous value in the column
-store_items.fillna(method = 'ffill', axis = 0)
-# We replace NaN values with the previous value in the row
-store_items.fillna(method = 'ffill', axis = 1)
-
+	bikes	glasses	pants	shirts	shoes	suits	watches
+store 1	20	0.0	30	15.0	8	45.0	35
+store 2	15	50.0	5	2.0	5	7.0	10
+store 3	20	4.0	30	0.0	10	0.0	35
+——————————————————————————————————————————————————————————————
+#.fillna(method = 'ffill', axis) 将通过前向填充 (ffill) 方法沿着给定 axis 使用上个已知值替换 NaN 值
 #.fillna(method = 'backfill', axis) 将通过后向填充 (backfill) 方法沿着给定 axis 使用下个已知值替换 NaN 值
-# We replace NaN values with the next value in the column
-store_items.fillna(method = 'backfill', axis = 0)
-#在 fillna() 函数中将关键字 inplace 设为 True，在原地替换 NaN 值。
-______________________________________________________________
-#.interpolate(method = 'linear', axis) 方法将通过 linear 插值使用沿着给定 axis 的值替换 NaN 值
+#原始 DataFrame 不会改变。可在 fillna() 函数中将关键字 inplace 设为 True，在原地替换 NaN 值
+#.interpolate(method = 'linear', axis) 方法将通过 linear 插值使用沿着给定 axis 的值替换 NaN 值。
+
 # We replace NaN values by using linear interpolation using column values
 store_items.interpolate(method = 'linear', axis = 0)
+	bikes	glasses	pants	shirts	shoes	suits	watches
+store 1	20	NaN	30	15.0	8	45.0	35
+store 2	15	50.0	5	2.0	5	7.0	10
+store 3	20	4.0	30	2.0	10	7.0	35
+# We replace NaN values by using linear interpolation using row values
+store_items.interpolate(method = 'linear', axis = 1)
+	bikes	glasses	pants	shirts	shoes	suits	watches
+store 1	20.0	25.0	30.0	15.0	8.0	45.0	35.0
+store 2	15.0	50.0	5.0	2.0	5.0	7.0	10.0
+store 3	20.0	4.0	30.0	20.0	10.0	22.5	35.0

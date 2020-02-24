@@ -1,0 +1,75 @@
+#CSV 代表逗号分隔值，但这些值实际可用不同的字符、制表符、空格等分隔。例如，如果文件用冒号分隔，可以将 read_csv() 与 sep 参数一起使用。
+df = pd.read_csv('student_scores.csv', sep=':')
+
+	ID	Name	Attendance	HW	Test1	Project1	Test2	Project2	Final
+0	27604	Joe	0.96	0.97	87.0	98.0	92.0	93.0	95.0
+1	30572	Alex	1.00	0.84	92.0	89.0	94.0	92.0	91.0
+2	39203	Avery	0.84	0.74	68.0	70.0	84.0	90.0	82.0
+3	28592	Kris	0.96	1.00	82.0	94.0	90.0	81.0	84.0
+4	27492	Rick	0.32	0.85	98.0	100.0	73.0	82.0	88.0
+
+#read_csv 的另一个功能是指定文件的哪一行作为标题，而标题指定了列标签。
+#通常第一行是标题，但有时如果文件顶部有额外的元信息，我们希望指定另一行作为标题。可以这样操作。
+df = pd.read_csv('student_scores.csv', header=2)
+	30572	Alex	1.0	0.84	92.0	89.0	94.0	92.0.1	91.0
+0	39203	Avery	0.84	0.74	68.0	70.0	84.0	90.0	82.0
+1	28592	Kris	0.96	1.00	82.0	94.0	90.0	81.0	84.0
+2	27492	Rick	0.32	0.85	98.0	100.0	73.0	82.0	88.0
+
+#如果文件中不包括列标签，可以使用 header=None 防止数据的第一行被误当做列标签。
+df = pd.read_csv('student_scores.csv', header=None)
+df.head()
+	0	  1	    2	          3	    4	    5	      6	      7 	      8
+0	ID	Name	Attendance	HW	Test1	Project1	Test2	Project2	Final
+1	27604	Joe	0.96	0.97	87.0	98.0	92.0	93.0	95.0
+2	30572	Alex	1.0	0.84	92.0	89.0	94.0	92.0	91.0
+3	39203	Avery	0.84	0.74	68.0	70.0	84.0	90.0	82.0
+4	28592	Kris	0.96	1.0	82.0	94.0	90.0	81.0	84.0
+
+#还可以用以下方法自己指定列标签。
+labels = ['id', 'name', 'attendance', 'hw', 'test1', 'project1', 'test2', 'project2', 'final']
+df = pd.read_csv('student_scores.csv', names=labels)
+
+  id	name	attendance	hw	test1	project1	test2	project2	final
+0	ID	Name	Attendance	HW	Test1	Project1	Test2	Project2	Final
+1	27604	Joe	0.96	0.97	87.0	98.0	92.0	93.0	95.0
+2	30572	Alex	1.0	0.84	92.0	89.0	94.0	92.0	91.0
+3	39203	Avery	0.84	0.74	68.0	70.0	84.0	90.0	82.0
+4	28592	Kris	0.96	1.0	82.0	94.0	90.0	81.0	84.0
+
+#如果想告诉 pandas，正在替换的数据包含标题行，可以用以下方法指定这一行。
+labels = ['id', 'name', 'attendance', 'hw', 'test1', 'project1', 'test2', 'project2', 'final']
+df = pd.read_csv('student_scores.csv', header=0, names=labels)
+
+    id	name	attendance	hw	test1	project1	test2	project2	final
+0	27604	Joe	0.96	0.97	87.0	98.0	92.0	93.0	95.0
+1	30572	Alex	1.00	0.84	92.0	89.0	94.0	92.0	91.0
+2	39203	Avery	0.84	0.74	68.0	70.0	84.0	90.0	82.0
+3	28592	Kris	0.96	1.00	82.0	94.0	90.0	81.0	84.0
+4	27492	Rick	0.32	0.85	98.0	100.0	73.0	82.0	88.0
+
+#除使用默认索引（从 0 递增 1 的整数）之外，还可以将一个或多个列指定为数据框的索引。
+df = pd.read_csv('student_scores.csv', index_col='Name')
+
+      ID	Attendance	HW	Test1	Project1	Test2	Project2	Final
+Name								
+Joe	27604	0.96	0.97	87.0	98.0	92.0	93.0	95.0
+Alex	30572	1.00	0.84	92.0	89.0	94.0	92.0	91.0
+Avery	39203	0.84	0.74	68.0	70.0	84.0	90.0	82.0
+Kris	28592	0.96	1.00	82.0	94.0	90.0	81.0	84.0
+Rick	27492	0.32	0.85	98.0	100.0	73.0	82.0	88.0
+
+df = pd.read_csv('student_scores.csv', index_col=['Name','ID'])
+
+#写入 CSV 文件
+df_powerplant.to_csv('powerplant_data_edited.csv')
+df = pd.read_csv('powerplant_data_edited.csv')
+df.head()
+	Unnamed: 0	AT	V	AP	RH	PE
+0	0	8.34	40.77	1010.84	90.01	480.48
+1	1	23.64	58.49	1011.40	74.20	445.75
+2	2	29.74	56.90	1007.15	41.91	438.76
+3	3	19.07	49.69	1007.22	76.79	453.09
+4	4	11.80	40.66	1017.13	97.20	464.43
+#to_csv() 默认保存索引，除非指定不保存。如需忽略索引，必须提供参数 index=False
+df_powerplant.to_csv('powerplant_data_edited.csv', index=False)

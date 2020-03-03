@@ -1,0 +1,25 @@
+#直方图看数值的分布
+#散点图看数据之间的关系
+@在jupyter notebook查看数据图
+% matplotlib inline
+#dataframe 和 series 对象都可以用绘图功能
+#dataframe直方图
+df.hist()
+df.hist(figsize=(8,8));
+#series直方图，就是某一列的图
+df['age'].hist();
+df['age'].plot(kind='hist');
+#用value_counts函数汇总一列中每个唯一值的数量，然后画柱状图、饼状图
+df['education'].value_counts().plot(kind = 'bar')
+df['workclass'].value_counts().plot(kind = 'pie')
+#出直方图和散点图很厉害的函数
+pd.plotting.scatter_matrix(df);
+#或直接用plot函数，画散点图
+df.plot(x='',y='',kind='scatter');
+df[''].plot(kind = 'box')
+——————————————————————————————————————————————————————————————————————————————
+#一个例子
+import matplotlib.pyplot as plt
+% matplotlib inline
+fig, ax = plt.subplots()
+ax.

@@ -18,8 +18,25 @@ pd.plotting.scatter_matrix(df);
 df.plot(x='',y='',kind='scatter');
 df[''].plot(kind = 'box')
 ——————————————————————————————————————————————————————————————————————————————
-#一个例子
+#一个例子 看不懂
 import matplotlib.pyplot as plt
 % matplotlib inline
 fig, ax = plt.subplots()
-ax.
+ax.hist(df_b['area'],alpha=0.5,label='benign')
+ax.hist(df_m['area'],alpha=0.5,label='malignant')
+ax.set_title('Distributions of Benign and Malignant Tumor Area')
+ax.set_xlabel('Area')
+ax.set_ylabel('Count')
+ax.legend(loc='upper right')
+plt.show()
+————————————————————————————————————————————————————————————————————————
+#收入分析例子
+#分成5000以上和5000以下两组
+df_a=df[df['income']=='>50K']
+df_b=df[df['income']=='<=50K']
+#用value_counts()返回值，图里会按值大小排序
+df_a['education'].value_counts().plot(kind='bar')
+#需要建立一个统一的index，这样对比图会比较好看
+ind=df_a['education'].value_counts().index
+df_a['education'].value_counts()[ind].plot(kind='bar')
+df_b['education'].value_counts()[ind].plot(kind='bar')

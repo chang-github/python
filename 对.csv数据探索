@@ -1,0 +1,18 @@
+# Import pandas
+import pandas as pd
+# Load census income data
+df = pd.read_csv('census_income_data.csv')
+df.head()
+#显示有多少entries,有几列属性，可以查看每列有多少非空值，每种属性的datatype
+df.info()
+#每列属性的datatype
+df.dtypes
+#对object元素具体看实际的type。一般是string
+type(df['education'][0])
+#用均值填充缺失值
+mean = df.mean()
+df.fillna(mean,inplace = True)
+# 检查数据中的重复
+df.duplicated().sum()
+# 丢弃重复
+df.drop_duplicates(inplace = True)

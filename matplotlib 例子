@@ -1,0 +1,18 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+% matplotlib inline
+df =pd.read_csv('winequality_edited.csv')
+# 用查询功能选择每个组，并获取其平均质量
+median = df['alcohol'].median()
+low = df.query('alcohol < {}'.format(median))
+high = df.query('alcohol >= {}'.format(median))
+mean_quality_low = low['quality'].mean()
+mean_quality_high = high['quality'].mean()
+# 用合适的标签创建柱状图
+locations = [1, 2]
+heights = [mean_quality_low, mean_quality_high]
+labels = ['Low', 'High']
+plt.bar(locations, heights, tick_label=labels)
+plt.title('Average Quality Ratings by Alcohol Content')
+plt.xlabel('Alcohol Content')
+plt.ylabel('Average Quality Rating');

@@ -1,0 +1,4 @@
+df.isnull()#将所有空值转换为true，非空为false
+df.isnull().any()#默认情况下，若有任意一列有值为true，any（）判断为true
+df.isnull().any(axis=1)#有任意一行有值为true，即有空值，判断为true
+df.isnull().any(axis=1).sum()#求出有几行存在空值

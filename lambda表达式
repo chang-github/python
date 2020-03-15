@@ -4,3 +4,6 @@ def multiply(x, y):
     return x * y
 简写为：
 double = lambda x, y: x * y
+____________________________________________
+# 在数据集中用下划线和小写标签代替空格
+df.rename(columns=lambda x: x.strip().lower().replace(" 0", "_"),inplace=True)

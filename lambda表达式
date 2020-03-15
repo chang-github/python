@@ -1,0 +1,6 @@
+#使用 Lambda 表达式创建匿名函数，即没有名称的函数。lambda 表达式非常适合快速创建在代码中以后不会用到的函数。
+我们可以使用 lambda 表达式将以下函数
+def multiply(x, y):
+    return x * y
+简写为：
+double = lambda x, y: x * y

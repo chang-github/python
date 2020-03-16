@@ -1,0 +1,25 @@
+# 检查 2008 cyl 列的值数量
+df_08['cyl'].value_counts()
+(6 cyl)     409
+(4 cyl)     283
+(8 cyl)     199
+(5 cyl)      48
+(12 cyl)     30
+(10 cyl)     14
+(2 cyl)       2
+(16 cyl)      1
+Name: cyl, dtype: int64
+df_08['cyl'].value_counts()
+
+# 从 2008 cyl 列的字符串中提取整数
+df_08['cyl'] = df_08['cyl'].str.extract('(\d+)').astype(int)
+df_08['cyl'].value_counts()
+6     409
+4     283
+8     199
+5      48
+12     30
+10     14
+2       2
+16      1
+Name: cyl, dtype: int64

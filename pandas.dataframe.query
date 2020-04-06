@@ -27,3 +27,5 @@ _________________________________________________________________
 4	 53717     	Negative  	False
 #patients without cancer who test positive
 df.query('has_cancer==False')['test_result'=='Positive']
+# What proportion of patients who tested positive has cancer?
+(df.query("test_result=='Positive'")['has_cancer']).mean()

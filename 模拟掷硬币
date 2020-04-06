@@ -1,3 +1,102 @@
 import numpy as np
 np.random.randint(2,size=10000).mean() #接近0.5
 np.random.choice([0,1],size=10000,p=[0.8,0.2]).mean() #接近0.2
+————————————————————————————————————————————————————————————————————
+numpy.random.randint 用法
+numpy.random.randint(low, high=None, size=None, dtype='l')
+Return random integers from the “discrete uniform” distribution of the specified dtype in the “half-open” interval [low, high). 
+If high is None (the default), then results are from [0, low).
+——————————————————————————————————————————————————————————————————
+# simulate 1 million tests of two fair coin flips
+tests = np.random.randint(2, size=(int(1e6), 2))
+# sums of all tests
+test_sums = tests.sum(axis=1)
+# proportion of tests that produced exactly two heads
+(test_sums == 2).mean()
+——————————————————————————————————————————————————————————————
+numpy.random.choice 用法
+numpy.random.choice(a, size=None, replace=True, p=None)
+Generates a random sample from a given 1-D array
+
+Parameters:	
+a : 1-D array-like or int
+If an ndarray, a random sample is generated from its elements. If an int, the random sample is generated as if a were np.arange(a)
+
+size : int or tuple of ints, optional
+Output shape. If the given shape is, e.g., (m, n, k), then m * n * k samples are drawn. Default is None, in which case a single value is returned.
+
+replace : boolean, optional
+Whether the sample is with or without replacement
+
+p : 1-D array-like, optional
+The probabilities associated with each entry in a. If not given the sample assumes a uniform distribution over all entries in a.
+
+Returns:	
+samples : single item or ndarray
+The generated random samples
+_______________________________________________________________
+Three biased coin flips with P(H) = 0.6 produce exactly one head
+# simulate 1 million tests of three biased coin flips
+tests = np.random.choice(2,size=(int(1e6),3),p=[0.4,0.6])
+# sums of all tests
+test_sums = tests.sum(axis=1)
+# proportion of tests that produced exactly one head
+(test_sums==1).mean()
+__________________________________________________________
+numpy.arange 用法
+numpy.arange([start, ]stop, [step, ]dtype=None)
+Return evenly spaced values within a given interval.
+Values are generated within the half-open interval [start, stop) (in other words, the interval including start but excluding stop). For integer arguments the function is equivalent to the Python built-in range function, but returns an ndarray rather than a list.
+When using a non-integer step, such as 0.1, the results will often not be consistent. It is better to use linspace for these cases.
+__________________________________________________________
+# simulate 1 million tests of one die roll
+tests = np.random.choice(np.arange(1,7),size=int(1e6))
+#tests = np.random.randint(1,7,size = int(1e6))
+# proportion of tests that produced an even number
+(tests%2==0).mean()
+________________________________________________________
+模拟二项分布用
+numpy.random.binomial(n, p, size=None)
+Draw samples from a binomial distribution.
+
+Samples are drawn from a binomial distribution with specified parameters, n trials and p probability of success where n an integer >= 0 and p is in the interval [0,1]. (n may be input as a float, but it is truncated to an integer in use)
+
+Parameters:	
+n : int or array_like of ints
+Parameter of the distribution, >= 0. Floats are also accepted, but they will be truncated to integers.
+
+p : float or array_like of floats
+Parameter of the distribution, >= 0 and <=1.
+
+size : int or tuple of ints, optional
+Output shape. If the given shape is, e.g., (m, n, k), then m * n * k samples are drawn. If size is None (default), a single value is returned if n and p are both scalars. Otherwise, np.broadcast(n, p).size samples are drawn.
+
+Returns:	
+out : ndarray or scalar
+Drawn samples from the parameterized binomial distribution, where each sample is equal to the number of successes over the n trials.
+_________________________________________________________________
+# number of heads from 10 fair coin flips
+np.random.binomial(10, 0.5)
+5
+
+# results from 20 tests with 10 coin flips
+np.random.binomial(10, 0.5, 20)
+array([5, 3, 6, 5, 6, 5, 5, 6, 6, 1, 5, 5, 5, 3, 4, 8, 5, 4, 9, 5])
+
+# mean number of heads from the 20 tests
+np.random.binomial(10, 0.5, 20).mean()
+4.8499999999999996
+
+# simulate 1 million tests of five biased coin flips
+tests = np.random.binomial(5,0.8,int(1e6))
+
+# proportion of tests that produced 5 heads
+(tests==5).mean()
+
+
+
+
+
+
+
+

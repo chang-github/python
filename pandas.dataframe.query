@@ -1,0 +1,29 @@
+DataFrame.query(self, expr, inplace=False, **kwargs)[source]
+Query the columns of a DataFrame with a boolean expression.
+
+Parameters
+exprstr
+The query string to evaluate.
+You can refer to variables in the environment by prefixing them with an ‘@’ character like @a + b.
+You can refer to column names that contain spaces or operators by surrounding them in backticks. This way you can also escape names that start with a digit, or those that are a Python keyword. Basically when it is not valid Python identifier. See notes down for more details.
+For example, if one of your columns is called a a and you want to sum it with b, your query should be `a a` + b.
+
+inplacebool
+Whether the query should modify the data in place or return a modified copy.
+
+**kwargs
+See the documentation for eval() for complete details on the keyword arguments accepted by DataFrame.query().
+
+Returns
+DataFrame
+DataFrame resulting from the provided query expression.
+_________________________________________________________________
+
+  patient_id	test_result	has_cancer
+0	 79452     	Negative	  False
+1	 81667	    Positive  	True
+2	 76297     	Negative  	False
+3	 36593     	Negative  	False
+4	 53717     	Negative  	False
+#patients without cancer who test positive
+df.query('has_cancer==False')['test_result'=='Positive']

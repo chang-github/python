@@ -1,0 +1,30 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+coffee_full = pd.read_csv('coffee-dataset.csv')
+coffee_red =coffee_full.sample(200)
+#dataframe.sample(self: ~FrameOrSeries, n=None, frac=None, replace=False, weights=None, random_state=None, axis=None)
+#return a random sample of items from an axis of object
+#n int 返回几个样本
+#frac float 返回百分之几的样本
+#replace bool 抽完是否放回 默认否
+#weight sstr or ndarray-like 权重，以某一列，这列没有值的权重为0
+#random_state int or numpy.random.RandomState, optional 某一seed
+#axis{0 or ‘index’, 1 or ‘columns’, None}
+#Returns
+#Series or DataFrame
+#A new object of same type as caller containing n items randomly sampled from the caller object.
+coffee_red.drinks_coffee.mean()
+#0.56999 样本中约57%的样本喝咖啡
+coffee_red[coffee_red[['drinks_coffee']==True]['height'].mean()
+#68.5202255 喝咖啡的平均身高
+bootsample = coffee_red.sample(200,replace = True)
+bootsample[bootsample['drinks_coffee']==True]['height'].mean()
+#67.93133
+boot_means =[]
+for i in range(10000):
+  bootsample = coffee_red.sample(200,replace=True)
+  boot_means.append(bootsample['drinks_coffdd']==True['height'].mean())
+#去掉前2.5%和后2.5%，得到95%置信区间
+np.precentile(bootmeans,2.5),np.precentile(bootmeans,97.5)
+#(68.059472,68.965222)

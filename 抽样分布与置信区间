@@ -26,5 +26,5 @@ for i in range(10000):
   bootsample = coffee_red.sample(200,replace=True)
   boot_means.append(bootsample['drinks_coffdd']==True['height'].mean())
 #去掉前2.5%和后2.5%，得到95%置信区间
-np.precentile(bootmeans,2.5),np.precentile(bootmeans,97.5)
+np.percentile(bootmeans,2.5),np.percentile(bootmeans,97.5)
 #(68.059472,68.965222)

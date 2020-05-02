@@ -1,0 +1,49 @@
+如何确定应该选择哪种假设
+方法一：置信区间
+自助抽样数据的一个样本集，反复计算样本均值，建立抽样分布和对杨的置信区间，确定合理值，观察假设与抽样分布是否一致
+想判断喝咖啡的所有人的平均身高是否大于70英寸
+#零假设：喝咖啡的人平均身高小于等于70
+#备择假设：喝咖啡的人平均身高大于70
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib.pyplot as plt
+np.random.seed(42)
+df=pd.read_csv('coffee_data.csv')
+sample_df=df.sample(150)
+bootsample=sample_df.sample(150,replace=True)
+means=[]
+#进行多次自助抽样，计算每个自助样本的均值
+for i in range(10000):
+    bootsample=sample_df.sample(150,replace=True)
+    means.append(bootsample.height.mean())
+#创建置信区间
+np.percentile(means,2.5),np.percentile(means,97.5)
+plt.hist(means)
+#观察图表，置信区间远低于70，说明零假设是正确的
+————————————————————————————————————————————————————————
+方法二：模拟零假设
+用零假设里最接近对立假设的值来进行模拟，模拟零假设时出现的情况，用抽样分布的标准偏差确定抽样分布，看零假设中的数据是否与它的抽样分布一致
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib.pyplot as plt
+np.random.seed(42)
+df=pd.read_csv('coffee_data.csv')
+#提问：喝咖啡的所有人的平均身高是否大于70inch
+#零假设：喝咖啡的人平均身高小于等于70
+#备择假设：喝咖啡的人平均身高大于70
+#若零假设为真，用零假设里最接近对立假设的值进行模拟（70），得到抽样分布的形状。
+#得到抽样分布的标准偏差
+sample = df.sample(150)
+means=[]
+for i in range(10000):
+  bootsample = sample.sample(150,replace=True)
+  means.append(bootsample.height.mean())
+np.std(means)
+#抽样分布的标准偏差为0.2658
+#根据中心极限定理，抽样分布应服从正态分布。
+#用正态分布进行模拟
+null_vals = np.random.normal(70#均值,np.std(means)#标准偏差,10000#size)#零假设中的可能均值 得出的值在69到71
+sample.height.mean()
+#67.6329 不在平均值等于70的零假设的范围内

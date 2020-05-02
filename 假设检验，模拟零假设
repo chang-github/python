@@ -45,5 +45,6 @@ np.std(means)
 #根据中心极限定理，抽样分布应服从正态分布。
 #用正态分布进行模拟
 null_vals = np.random.normal(70#均值,np.std(means)#标准偏差,10000#size)#零假设中的可能均值 得出的值在69到71
+plt.hist(null_vals)
 sample.height.mean()
 #67.6329 不在平均值等于70的零假设的范围内

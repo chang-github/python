@@ -46,7 +46,7 @@ np.std(means)
 #用正态分布进行模拟
 null_vals = np.random.normal(70#均值,np.std(means)#标准偏差,10000#size)#零假设中的可能均值 得出的值在69到71
 plt.hist(null_vals)
-sample.height.mean()
+sample_mean=sample.height.mean()
 #67.6329 不在平均值等于70的零假设的范围内
 ——————————————————————————————————————————————————————————
 若备择假设为总体均值大于70，可通过计算大于样本平均值的模拟样本的比例算P值
@@ -59,4 +59,6 @@ sample.height.mean()
 
 若备择假设为总体均值不等于70
 null_mean=70
-(null_vals<sample_mean).mean()+(null_vals>null_mean+(null_mean-sample_mean)).mean()
+low=sample_mean
+high=null_mean+(null_mean-sample_mean)
+(null_vals<low).mean()+(null_vals>high)).mean()

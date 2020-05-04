@@ -12,5 +12,10 @@ obs_diff=experiment_mean-control_mean #15.537
 diffs=[]
 for i in range(10000):
     b_samp=df.sample(df.shape[0],replace=True)
-    control_mean=b_samp.query('action=="view" and group ="control"')['duration'].mean()
-    
+    control_mean=b_samp.query(group ="control"')['duration'].mean()
+    experiment_mean=b_samp.query(group ="experiment"')['duration'].mean()
+    diffs.append(experiment_mean-control_mean)
+diffs=np.array(diffs)
+null_vals=np.random.noraml(0,diffs.std(),diffs.size)
+plt.hist(null_vals);
+plt.axvline(x=obs_diff,color='red');

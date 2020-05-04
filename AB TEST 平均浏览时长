@@ -1,0 +1,16 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+% matplotlib inline
+df = pd.read_csv('xx.csv')# timestamp id group action duration
+views = df.query('action="view"')#只研究view网页的动作
+reading_times=views.groupby(['id','group'])[duration].mean()#分对照组和实验组，独立用户，浏览网页平均时长
+reading_times=reading_times.reset_index()#充值索引id group duration
+control_mean=df.query('group="control"')['duration'].mean()
+experiment_mean=df.query('group="experiment"')['duration'].mean()
+obs_diff=experiment_mean-control_mean #15.537
+diffs=[]
+for i in range(10000):
+    b_samp=df.sample(df.shape[0],replace=True)
+    control_mean=b_samp.query('action=="view" and group ="control"')['duration'].mean()
+    

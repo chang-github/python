@@ -5,6 +5,6 @@ df = pd.read_csv('xx.csv')
 #unnamed:0 price arda
 #增加一列截距
 df['intercept']=1
-lm = sm.OLS(df['price'],df[{'intercept','area'}])#提供y值，和x值
+lm = sm.OLS(df['price'],df[['intercept','area']])#提供y值，和x值
 results=lm.fit()
 results.summary()

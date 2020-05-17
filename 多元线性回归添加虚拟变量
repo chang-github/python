@@ -15,3 +15,4 @@ df['intercept']=1
 lm=sm.OLS(df['price'],df[['intercept','lodge','ranch']])
 results=lm.fit()
 results.summary()
+#得到的intercept是被舍弃的victorian的值，其他的是相对于victorian的变化

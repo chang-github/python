@@ -1,0 +1,17 @@
+import numpy as np
+import pandas as pd
+import satsmodels.api as sm
+df=pd.read_csv('xxx.csv')
+df.head()
+#house_id neighborhood area bedrooms bathrooms style price
+df[['lodge','ranch','victorian']]=pd.get_dummies(df['style'])
+#lodge ranch victorian
+# 1    0     0
+# 0    1     0
+# 1    0     0
+#为了保证是满秩的，必须要舍弃一列，舍弃谁，谁就是基准
+#通过三种style预测房屋价格
+df['intercept']=1
+lm=sm.OLS(df['price'],df[['intercept','lodge','ranch']])
+results=lm.fit()
+results.summary()

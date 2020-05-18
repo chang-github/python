@@ -1,0 +1,22 @@
+import pandas as pd
+import numpy as np
+import seaborn as sb
+from patsy import dmatrices
+import statsmodels.api as sm
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+%matplotlib inline
+df=pd.read_csv('xx.csv')
+#用seaborn绘画每个变量之间的关系
+sb.pairplot(df[['area','bedrooms','bathrooms']])#互相都是正相关
+#用patsy创建x,y的方程
+y,X=dmatrices('price ~ area + bedrooms + bathrooms',df,return_type='dataframe')
+vif=pd.DataFrame()
+vif["VIF Factor"]=[variance_inflation_factor(X.values,i) for i in range(X.shape[1])]
+vif["features"]=X.columns
+vif
+
+  VIF Factor features
+0 7.327      intercept
+1 5.458      area
+2 20.854     bedrooms
+3 19.006     bathrooms

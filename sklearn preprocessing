@@ -1,5 +1,6 @@
 from sklearn import preprocessing
 import numpy as np
-x=preprocessing.scale(df[['']])
+df.fillna(df.mean(),inplace=True)
+x=preprocessing.scale(df[['x2','x3','x4']])
 min_max_scaler=p.MinMaxScaler()
 min_max_scaler.fit_transform(df[['']])

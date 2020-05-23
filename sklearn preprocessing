@@ -1,0 +1,5 @@
+from sklearn import preprocessing
+import numpy as np
+x=preprocessing.scale(df[['']])
+min_max_scaler=p.MinMaxScaler()
+min_max_scaler.fit_transform(df[['']])

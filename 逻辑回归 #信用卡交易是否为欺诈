@@ -9,4 +9,4 @@ df=df.drop('no_fraud',axis=1)
 df['intercept']=1
 logit_mod=sm.Logit(df['fraud'],df[['intercept','duration']]
 results=logit_mod.fit()
-results.summary()
+results.summary2()

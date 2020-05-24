@@ -1,0 +1,12 @@
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+df=pd.read_csv('xx.csv')
+transactrion duration day fraud
+#把分类变量换为虚拟变量
+df[['no_fraud','fraud']]=pd.get_dummies(df['fraud'])
+df=df.drop('no_fraud',axis=1)
+df['intercept']=1
+logit_mod=sm.Logit(df['fraud'],df[['intercept','duration']]
+results=logit_mod.fit()
+results.summary()
